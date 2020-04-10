@@ -1,0 +1,5 @@
+spring:
+  message: Hello there
+
+server:
+  port: 8081
