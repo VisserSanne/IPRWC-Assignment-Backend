@@ -13,6 +13,7 @@ public class RelaxWithGemsApplication {
 		SpringApplication.run(RelaxWithGemsApplication.class, args);
 	}
 
+	@CrossOrigin(origins = {"http://localhost:4200", "https://relaxwithgems.netlify.com/"})
 	@GetMapping("/hello")
 	public HelloWorld hello(@RequestParam(value = "name", defaultValue = "World") String name) {
 		HelloWorld result = new HelloWorld();
