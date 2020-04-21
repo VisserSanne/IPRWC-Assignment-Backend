@@ -1,19 +1,21 @@
 package com.example.RelaxWithGems.Models;
 
-import java.lang.reflect.Array;
-
 public class Item {
     public String id;
     public String name;
-    public String desciption;
+    public String description;
+    public double price;
     public String imagePath;
 
-    public Item(String id, String name, String desciption, String imagePath) {
+    public Item(){}
+    public Item(String id, String name, String description, double price, String imagePath) {
         this.id = id;
         this.name = name;
-        this.desciption = desciption;
+        this.description = description;
+        this.price = price;
         this.imagePath = imagePath;
     }
+
 
     public String getId() {
         return id;
@@ -31,12 +33,20 @@ public class Item {
         this.name = name;
     }
 
-    public String getDesciption() {
-        return desciption;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDesciption(String desciption) {
-        this.desciption = desciption;
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     public String getImagePath() {
