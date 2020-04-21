@@ -54,7 +54,6 @@ public class ItemController {
         docData.put("description", item.description);
         docData.put("price", item.price);
         docData.put("imagePath", item.imagePath);
-        System.out.println(docData);
         ApiFuture<DocumentReference> addedDocRef = db.collection("items").add(docData);
 
         return ("Added document with ID: " + addedDocRef.get().getId());
@@ -70,7 +69,6 @@ public class ItemController {
         docData.put("description", item.description);
         docData.put("price", item.price);
         docData.put("imagePath", item.imagePath);
-        System.out.println(docData);
         ApiFuture<WriteResult> addedDocRef = db.collection("items").document(id).set(docData);
 
         return ("Added document with ID: " + addedDocRef.get().getUpdateTime());
@@ -79,10 +77,9 @@ public class ItemController {
     @DeleteMapping("/{id}")
     public String deleteItemByID(@PathVariable(value = "id") String id) throws ExecutionException, InterruptedException {
         Firestore db = getDb();
-        System.out.println(id);
+
         ApiFuture<WriteResult> writeResult = db.collection("items").document(id).delete();
-//        db.collection("items").document(id).delete();
-        System.out.println("Update time : " + writeResult.get().getUpdateTime());
+
         return ("Update time : " + writeResult.get().getUpdateTime());
     }
 

@@ -31,7 +31,6 @@ public class FirebaseAuthenticationTokenFilter extends AbstractAuthenticationPro
             String bearerToken = request.getHeader("Authorization");
             if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")) {
                 token = bearerToken.substring(7, bearerToken.length());
-                System.out.println(token);
             }
         }
         return getAuthenticationManager().authenticate(new FirebaseAuthenticationToken(token));
@@ -42,8 +41,6 @@ public class FirebaseAuthenticationTokenFilter extends AbstractAuthenticationPro
             throws IOException, ServletException {
         super.successfulAuthentication(request, response, chain, authResult);
 
-        // As this authentication is in HTTP header, after success we need to continue the request normally
-        // and return the response as if the resource was not secured at all
         chain.doFilter(request, response);
     }
 

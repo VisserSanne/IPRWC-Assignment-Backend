@@ -6,7 +6,6 @@ import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.*;
 import org.springframework.web.bind.annotation.*;
 
-import java.lang.reflect.Array;
 import java.util.*;
 import java.util.concurrent.ExecutionException;
 
@@ -35,7 +34,6 @@ public class BasketController {
             else {
                 itemList.add(new Item(itemID,"","",0,""));
             }
-
         }
 
         return itemList;
@@ -51,25 +49,9 @@ public class BasketController {
         }
 
         ApiFuture<WriteResult> writeResult = db.collection("baskets").document(uid).update("items", docData);
-        
+
         return ("Update time : " + writeResult.get().getUpdateTime());
     }
-
-//    @PutMapping("/{id}")
-//    public String updateItemByID(@RequestBody Item item, @PathVariable(value = "id") String id) throws ExecutionException, InterruptedException {
-//        Firestore db = getDb();
-//
-//        Map<String, Object> docData = new HashMap<>();
-//
-//        docData.put("name", item.name);
-//        docData.put("description", item.description);
-//        docData.put("price", item.price);
-//        docData.put("imagePath", item.imagePath);
-//        System.out.println(docData);
-//        ApiFuture<WriteResult> addedDocRef = db.collection("items").document(id).set(docData);
-//
-//        return ("Added document with ID: " + addedDocRef.get().getUpdateTime());
-//    }
 
     public Firestore getDb(){
         return RelaxWithGemsApplication.getdb();
