@@ -3,10 +3,12 @@ package com.example.RelaxWithGems;
 import com.example.RelaxWithGems.Models.HelloWorld;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.firestore.Firestore;
+import com.google.cloud.storage.Bucket;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.cloud.FirestoreClient;
+import com.google.firebase.cloud.StorageClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
@@ -23,6 +25,7 @@ import java.io.*;
 public class RelaxWithGemsApplication {
 
 	public static Firestore db;
+	public static Bucket storage;
 
 	public static void main(String[] args) {
 		SpringApplication.run(RelaxWithGemsApplication.class, args);
@@ -45,6 +48,7 @@ public class RelaxWithGemsApplication {
 		FirebaseOptions options = new FirebaseOptions.Builder()
 				.setCredentials(GoogleCredentials.fromStream(serviceAccount))
 				.setDatabaseUrl("https://relaxwithgems.firebaseio.com")
+				.setStorageBucket("relaxwithgems.appspot.com")
 				.build();
 		if (FirebaseApp.getApps().isEmpty()){
 			FirebaseApp.initializeApp(options);
@@ -52,6 +56,7 @@ public class RelaxWithGemsApplication {
 		}
 
 		db = FirestoreClient.getFirestore();
+		this.storage = StorageClient.getInstance().bucket();
 		return FirebaseAuth.getInstance();
 	}
 

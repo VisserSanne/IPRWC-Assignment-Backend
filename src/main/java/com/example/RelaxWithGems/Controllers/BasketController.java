@@ -25,6 +25,7 @@ public class BasketController {
 
         List<Item> itemList = new ArrayList<>();
 
+        if(itemIDs !=null){
         for (String itemID: itemIDs) {
             DocumentSnapshot itemDocument = db.collection("items").document(itemID).get().get();
             if(itemDocument.getString("name") != null){
@@ -34,14 +35,15 @@ public class BasketController {
             else {
                 itemList.add(new Item(itemID,"","",0,""));
             }
-        }
+        }}
 
         return itemList;
     }
 
     @PutMapping("/{uid}")
-    public String putItems(@PathVariable(value = "uid") String uid, @RequestBody Item[] items) throws ExecutionException, InterruptedException {
+    public List<Item> putItems(@PathVariable(value = "uid") String uid, @RequestBody Item[] items) throws ExecutionException, InterruptedException {
         Firestore db = getDb();
+        List<Item> itemList = Arrays.asList(items);
 
         List<String> docData = new ArrayList<>();
         for(Item item : items){
@@ -50,7 +52,20 @@ public class BasketController {
 
         ApiFuture<WriteResult> writeResult = db.collection("baskets").document(uid).update("items", docData);
 
-        return ("Update time : " + writeResult.get().getUpdateTime());
+        return (itemList);
+    }
+
+    @PostMapping("/{uid}")
+    public List<Item> setRole(@PathVariable(value = "uid") String uid, @RequestBody Item[] items){
+        Firestore db = getDb();
+        List<Item> itemList = Arrays.asList(items);
+
+        Map<String, Object> docData = new HashMap<>();
+        docData.put("items", itemList);
+
+        ApiFuture<WriteResult> addedDocRef = db.collection("baskets").document(uid).set(docData);
+
+        return itemList;
     }
 
     public Firestore getDb(){
