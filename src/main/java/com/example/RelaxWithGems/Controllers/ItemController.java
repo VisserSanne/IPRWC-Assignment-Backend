@@ -18,7 +18,7 @@ import java.util.concurrent.ExecutionException;
 
 import static com.example.RelaxWithGems.RelaxWithGemsApplication.db;
 
-@CrossOrigin(origins = {"http://localhost:4200", "https://relaxwithgems.netlify.com"})
+@CrossOrigin(origins = {"http://localhost:4200", "https://relaxwithgems.netlify.com", "https://relaxwithgems.netlify.app"})
 @RestController
 @RequestMapping("/items")
 public class ItemController {

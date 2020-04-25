@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
-@CrossOrigin(origins = {"http://localhost:4200", "https://relaxwithgems.netlify.com"})
+@CrossOrigin(origins = {"http://localhost:4200", "https://relaxwithgems.netlify.com", "https://relaxwithgems.netlify.app"})
 @RestController
 @RequestMapping("/users")
 public class UserController {

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.*;
 import java.util.concurrent.ExecutionException;
 
-@CrossOrigin(origins = {"http://localhost:4200", "https://relaxwithgems.netlify.com"})
+@CrossOrigin(origins = {"http://localhost:4200", "https://relaxwithgems.netlify.com", "https://relaxwithgems.netlify.app"})
 @RestController
 @RequestMapping("/basket")
 public class BasketController {
